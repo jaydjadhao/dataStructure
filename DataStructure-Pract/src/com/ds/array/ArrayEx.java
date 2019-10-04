@@ -1,4 +1,4 @@
-package com.array;
+package com.ds.array;
 
 public class ArrayEx {
 
