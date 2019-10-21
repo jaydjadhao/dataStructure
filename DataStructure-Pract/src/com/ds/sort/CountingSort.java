@@ -1,17 +1,16 @@
 package com.ds.sort;
 
-public class BubbleSort {
-
+public class CountingSort {
 	public static void main(String[] args) {
-		int[] a = {20,35,-15,7,55,1,-22};
+		int[] a = {2,5,9,8,2,8,7,10,4,3};
 		System.out.println("Unsorted Array : ");
 		displayArray(a);
 		long startTime = System.nanoTime();
 		// Sorting the Array by Bubble Sort
-		bubleSortImpl(a);
+		countingSortImpl(a, 1, 10);
 		long endTime = System.nanoTime();
 
-		System.out.println("Sorted Array by bubleSortImpl : ");
+		System.out.println("Sorted Array by countingSortImpl : ");
 		displayArray(a);
 		System.out.println("Execution Time in nanoseconds : " + calculateTimeElapsed(endTime, startTime));
 
@@ -24,24 +23,26 @@ public class BubbleSort {
 		}
 		System.out.println();
 	}
-	public static void bubleSortImpl(int a[]) {
+	public static void countingSortImpl(int a[], int min, int max) {
 		// if Array is empty or with only one element no need to sort 
 		if(a == null || a.length == 1) return;
 		
-		for(int lastUnsortedIndex = a.length - 1 ; lastUnsortedIndex > 0 ; lastUnsortedIndex --) {
-			for(int ind = 0; ind < lastUnsortedIndex; ind++) {
-				if(a[ind] > a[ind+1]) swap(a, ind, ind+1);
+		int[] countArray = new int[(max - min)+ 1];
+		for(int i = 0; i< a.length; i++) {
+			countArray[a[i] - min]++;
+		}
+		
+		int j = 0;
+		
+		// copy element from countArray	
+		for(int i = min; i <= max; i++) {
+			while(countArray[i - min] > 0 ) {
+				a[j++] = i;
+				countArray[i - min] --;
 			}
 		}
 	}
-	
-	public static void swap(int a[], int i, int j) {
-		if(i==j) return;
-		
-		int temp = a[i];
-		a[i] = a[j];
-		a[j] = temp;
-	}
+
 	
 	public static double calculateTimeElapsed(long endTime, long startTime) {
 		return (endTime - startTime) ;
