@@ -68,24 +68,6 @@ public class DescendingMergeSort {
 		}
 	}
 
-	public static void insertionSortImpl(int[] a, int firstUnsortedIndex) {
-
-		if (a == null || a.length == 1 || firstUnsortedIndex >= a.length )
-			return;
-
-		int newElement = a[firstUnsortedIndex];
-		int ind = firstUnsortedIndex;
-		for (; ind > 0 && a[ind - 1] > newElement; ind--) {
-			a[ind] = a[ind - 1];
-		}
-		a[ind] = newElement;
-		
-		System.out.println("calling : insertionSortImpl(a, ++"+ firstUnsortedIndex + "); ");
-		insertionSortImpl(a, ++firstUnsortedIndex);
-
-	
-
-	}
 
 	public static int counter = 0;
 	public static void displayArray(int a[]) {
